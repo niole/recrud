@@ -115,9 +115,6 @@ export default class Recruder {
     //});
   }
 
-  read(stateType, filterSpec) {
-  }
-
   update(stateType, createSpec, filterSpec) {
   }
 
