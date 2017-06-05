@@ -2,6 +2,6 @@ module Main where
 
 import Control.Monad.Eff.Console
 import Data.Show (show)
-import Recruder (create)
+import Recruder (create, read, update, remove)
 
-main = log ( show (create true false) )
+main = log ( show ( update true (\_ -> false) (\_ -> true)) )

@@ -118,6 +118,9 @@ export default class Recruder {
   update(stateType, createSpec, filterSpec) {
   }
 
+  read(stateType, filterSpec) {
+  }
+
   remove(stateType, filterSpec) {
   }
 

@@ -1,50 +1,25 @@
 module Recruder (
   class Recruder
+  , read
   , create
   , update
   , remove
-  , RelationalOp
   , Primitive
-  , Select
   , Filter
-  , SelectWhere
-  , SelectAccessor
-  , Accessor
 ) where
 
 data Primitive = String | Number | Boolean
-type Accessor = String
-type LT = String
-type LTE = String
-type GT = String
-type GTE = String
-type EQ = String
-data RelationalOp = LT | LTE | GT | GTE | EQ
-
-type Filter =
-  { operator :: RelationalOp
-  ,value :: Primitive
-  }
-
-type SelectWhere =
-  {
-  accessor :: Accessor
-  ,where :: Select
-  }
-
-type SelectAccessor =
-  {
-  accessor :: Accessor
-  }
-
-data Select = SelectAccessor | SelectWhere | Primitive
+type Transformer a = a -> a
+type Filter a = a -> Boolean
 
 class Recruder a where
-  create :: a -> a -> a
-  update :: a -> Select -> Filter -> a
-  remove :: a -> Filter -> a
+  create :: a -> a
+  read :: a -> Filter a -> a
+  update :: a -> Transformer a -> Filter a -> a
+  remove :: a -> Filter a -> a
 
 instance recruderBoolean :: Recruder Boolean where
-  create _ new = new
-  update state select _ = state
-  remove state filter = state
+  create new = new
+  read state _ = state
+  update state trans _ = trans state
+  remove state _ = state
